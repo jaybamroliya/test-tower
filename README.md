@@ -20,6 +20,15 @@ Agents:
 - Security Agent: Validates permissions
 - Observer Agent: Logs activity and metrics
 
+## Execution Flow
+1. User submits a task via CLI
+2. Archestra validates the request using the Security Agent
+3. Approved tasks are executed by the Task Agent
+4. All actions are logged by the Observer Agent
+
+Agents never communicate directly.
+All execution is governed through Archestra.
+
 ## Why Archestra
 Archestra provides centralized orchestration, policy enforcement, and
 observability for MCP agents—capabilities that are impossible to achieve
