@@ -29,7 +29,44 @@ Agents:
 Agents never communicate directly.
 All execution is governed through Archestra.
 
+## Permission Scopes
+
+The Security Agent enforces scoped permissions before any task is executed.
+
+| Scope   | Allowed Actions |
+| ------- | --------------- |
+| read    | hello, status   |
+| execute | run, deploy     |
+
+Requests that do not match a defined permission scope are explicitly denied, ensuring safe and predictable agent behavior.
+
+## Failure Handling
+
+The system demonstrates controlled failure scenarios:
+1. Unauthorized tasks are denied by policy
+2. Unknown tasks without a permission scope are rejected
+3. Explicitly forbidden actions are blocked
+
+This proves that MCP agents cannot bypass security controls.
+
+## Architecture Diagram
+
+User
+  ↓
+CLI (agentctl)
+  ↓
+Archestra Control Plane
+  ├─ Security Agent (policy enforcement)
+  ├─ Task Agent (execution)
+  └─ Observer Agent (logging & metrics)
+
+
 ## Why Archestra
-Archestra provides centralized orchestration, policy enforcement, and
+
+Archestra provides:
+1. Centralized orchestration of MCP agents
+2. Policy-based security enforcement
+3. Built-in observability and execution tracing
+4. A production-ready control plane for AI agents'
 observability for MCP agents—capabilities that are impossible to achieve
 when agents run independently.
