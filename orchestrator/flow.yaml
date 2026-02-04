@@ -1,0 +1,23 @@
+flow:
+  name: mcp-agent-control-tower
+
+  description: >
+    Centralized orchestration of MCP agents with security
+    enforcement and observability via Archestra.
+
+  steps:
+    - name: authorize
+      agent: security-agent
+      action: authorize
+
+    - name: execute
+      agent: task-agent
+      action: execute
+      depends_on:
+        - authorize
+
+    - name: observe
+      agent: observer-agent
+      action: log
+      depends_on:
+        - execute
